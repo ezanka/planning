@@ -49,7 +49,9 @@ Copier .env.example → .env et remplir :
     pnpm dev
     ```
 
-🚀 Fonctionnalités
+---
+
+## 🚀 Fonctionnalités
 
 ✅ Authentification avec BetterAuth (signup / signin)
 ✅ Redirection automatique si connecté / non connecté
@@ -57,9 +59,12 @@ Copier .env.example → .env et remplir :
 ✅ Thème clair / sombre avec Shadcn Theme Toggle
 ✅ Exemple de composant (Button, card...) inclus
 
+---
 
-⚡ Utilisation
+## ⚡ Utilisation
 Tu peux utiliser ce template comme base pour tes futurs projets :
 
-👤 Auteur
+---
+
+## 👤 Auteur
 Template créé par Ezanka – réutilisable pour tous tes futurs projets 🚀
