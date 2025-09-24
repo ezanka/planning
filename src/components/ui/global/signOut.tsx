@@ -14,7 +14,7 @@ export default function SignOut() {
         if (res.data?.success) {
             router.push("/auth/signin");
             toast.custom(() => (
-                <div className="bg-[#111010] text-[#FAFAFA] p-4 rounded-2xl shadow-lg">
+                <div className="bg-rbackground text-foeground p-4 rounded-2xl shadow-lg">
                     <div className="flex items-center gap-2">
                         <BadgeCheck />
                         <div>
@@ -26,7 +26,7 @@ export default function SignOut() {
             ))
         } else {
             toast.custom(() => (
-                <div className="bg-[#111010] text-[#FAFAFA] p-4 rounded-2xl shadow-lg">
+                <div className="bg-background text-foreground p-4 rounded-2xl shadow-lg">
                     <div className="flex items-center gap-2">
                         <BadgeX />
                         <div>

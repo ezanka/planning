@@ -114,7 +114,7 @@ export function SignUpForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full" type="submit">S'inscrire</Button>
+                <Button className="w-full hover:cursor-pointer" type="submit">S'inscrire</Button>
                 <footer className="flex items-center justify-center gap-2 mt-4">
                     <span>Déjà inscrit ?</span><Link className="underline" href="/auth/signin">Se connecter</Link>
                 </footer>
