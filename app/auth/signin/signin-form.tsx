@@ -19,6 +19,7 @@ import { authClient } from "@/src/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { Separator } from "@/src/components/ui/shadcn/separator"
+import { useState } from "react"
 import Link from "next/link"
 
 const formSchema = z.object({
@@ -27,6 +28,8 @@ const formSchema = z.object({
 })
 
 export function SignInForm() {
+    const [isLoading, setIsLoading] = useState(false);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -39,18 +42,25 @@ export function SignInForm() {
     
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        await authClient.signIn.email({
-            email: values.email,
-            password: values.password,
-        }, {
-            onSuccess: () => {
-                router.push("/dashboard");
-                router.refresh();
-            },
-            onError: (error) => {
-                toast.error(error.error.message || "An error occurred during sign in");
-            },
-        })
+
+        try {
+            setIsLoading(true);
+            await authClient.signIn.email({
+                email: values.email,
+                password: values.password,
+            }, {
+                onSuccess: () => {
+                    router.push("/dashboard");
+                    router.refresh();
+                },
+                onError: (error) => {
+                    toast.error(error.error.message || "An error occurred during sign in");
+                },
+            })
+        } finally {
+            setIsLoading(false);
+        }
+
     }
 
     const handleLoginWithGoogle = async () => {
@@ -89,7 +99,7 @@ export function SignInForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full hover:cursor-pointer" type="submit">Se connecter</Button>
+                <Button className="w-full hover:cursor-pointer" type="submit" disabled={isLoading}>{isLoading ? "Connexion en cours..." : "Se connecter"}</Button>
                 <div>
                     <Separator />
                     <p className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card p-4">ou</p>

@@ -18,6 +18,7 @@ import { z } from "zod"
 import { authClient } from "@/src/lib/auth-client"
 
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { toast } from "sonner"
 import Link from "next/link"
 
@@ -29,6 +30,8 @@ const formSchema = z.object({
 })
 
 export function SignUpForm() {
+    const [isLoading, setIsLoading] = useState(false);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -42,18 +45,26 @@ export function SignUpForm() {
     const router = useRouter()
     
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        await authClient.signUp.email({
-            name: `${values.lastName} ${values.firstName}`,
-            email: values.email,
-            password: values.password,
-        }, {
-            onSuccess: () => {
-                router.push("/auth/signin");
-            },
-            onError: (error) => {
-                toast.error(error.error.message || "An error occurred during sign up");
-            },
-        })
+
+        try {
+            setIsLoading(true);
+
+            await authClient.signUp.email({
+                name: `${values.lastName} ${values.firstName}`,
+                email: values.email,
+                password: values.password,
+            }, {
+                onSuccess: () => {
+                    router.push("/auth/signin");
+                },
+                onError: (error) => {
+                    toast.error(error.error.message || "An error occurred during sign up");
+                },
+            })
+        } finally {
+            setIsLoading(false);
+        }
+
     }
 
     return (
@@ -114,7 +125,7 @@ export function SignUpForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full hover:cursor-pointer" type="submit">S&apos;inscrire</Button>
+                <Button className="w-full hover:cursor-pointer" type="submit" disabled={isLoading}>{isLoading ? "Création de votre compte..." : "S'inscrire"}</Button>
                 <footer className="flex items-center justify-center gap-2 mt-4">
                     <span>Déjà inscrit ?</span><Link className="underline" href="/auth/signin">Se connecter</Link>
                 </footer>
