@@ -97,10 +97,10 @@ export function SignInForm() {
                 <button
                     type="button"
                     onClick={handleLoginWithGoogle}
-                    className="flex items-center gap-3 w-full py-3 px-4 rounded-lg bg-foreground hover:bg-foreground/80 hover:cursor-pointer border border-accent shadow-sm transition-all"
+                    className="flex items-center gap-3 w-full py-3 px-4 rounded-lg bg-main hover:bg-border hover:cursor-pointer border border-accent shadow-sm transition-all duration-150"
                 >
                     <Image src="/google.png" alt="Google" width={24} height={24} className="w-6 h-6 absolute" />
-                    <span className="flex-1 text-secondary text-base font-medium text-center">Se connecter avec Google</span>
+                    <span className="flex-1 text-foreground text-base font-medium text-center">Se connecter avec Google</span>
                 </button>
                 <footer className="flex items-center justify-center gap-2 mt-4">
                     <span>Pas encore inscrit ?</span><Link className="underline" href="/auth/signup">S&apos;inscrire</Link>
