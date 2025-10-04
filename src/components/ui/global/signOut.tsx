@@ -5,11 +5,15 @@ import { authClient } from "@/src/lib/auth-client";
 import { toast } from "sonner";
 import { BadgeCheck, BadgeX } from "lucide-react";
 import { Button } from "@/src/components/ui/shadcn/button";
+import { useState } from "react";
+import { Spinner } from "../shadcn/spinner";
 
 export default function SignOut() {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     const handleSignOut = async () => {
+        setLoading(true);
         const res = await authClient.signOut();
         if (res.data?.success) {
             router.push("/auth/signin");
@@ -24,6 +28,7 @@ export default function SignOut() {
                     </div>
                 </div>
             ))
+            setLoading(false);
         } else {
             toast.custom(() => (
                 <div className="bg-background text-foreground p-4 rounded-2xl shadow-lg">
@@ -36,12 +41,22 @@ export default function SignOut() {
                     </div>
                 </div>
             ))
+            setLoading(false);
         }
     };
 
     return (
-        <Button onClick={handleSignOut} className="hover:cursor-pointer">
-            Se déconnecter
-        </Button>
+        <>
+            {loading ? 
+                <Button onClick={handleSignOut} disabled className="hover:cursor-pointer">
+                    <Spinner /> Déconnexion en cours...
+                </Button>
+            :
+                <Button onClick={handleSignOut} disabled={false} className="hover:cursor-pointer">
+                    Se déconnecter
+                </Button>
+            }
+        </>
+
     );
 }
