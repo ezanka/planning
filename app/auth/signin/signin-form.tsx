@@ -21,6 +21,7 @@ import { toast } from "sonner"
 import { Separator } from "@/src/components/ui/shadcn/separator"
 import { useState } from "react"
 import Link from "next/link"
+import { Spinner } from "@/src/components/ui/shadcn/spinner"
 
 const formSchema = z.object({
     email: z.string(),
@@ -99,7 +100,11 @@ export function SignInForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full hover:cursor-pointer" type="submit" disabled={isLoading}>{isLoading ? "Connexion en cours..." : "Se connecter"}</Button>
+                {isLoading ?
+                <Button className="w-full hover:cursor-pointer" type="submit" disabled={isLoading}><Spinner /> Connexion en cours...</Button>
+                :
+                <Button className="w-full hover:cursor-pointer" type="submit" disabled={false}>Se connecter</Button>
+                }
                 <div>
                     <Separator />
                     <p className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card p-4">ou</p>

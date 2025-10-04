@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import Link from "next/link"
+import { Spinner } from "@/src/components/ui/shadcn/spinner"
 
 const formSchema = z.object({
     lastName: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
@@ -125,7 +126,11 @@ export function SignUpForm() {
                         </FormItem>
                     )}
                 />
-                <Button className="w-full hover:cursor-pointer" type="submit" disabled={isLoading}>{isLoading ? "Création de votre compte..." : "S'inscrire"}</Button>
+                {isLoading ?
+                <Button className="w-full hover:cursor-pointer" type="submit" disabled={isLoading}><Spinner /> Création de votre compte...</Button>
+                :
+                <Button className="w-full hover:cursor-pointer" type="submit" disabled={false}>S&apos;inscrire</Button>
+                }
                 <footer className="flex items-center justify-center gap-2 mt-4">
                     <span>Déjà inscrit ?</span><Link className="underline" href="/auth/signin">Se connecter</Link>
                 </footer>
