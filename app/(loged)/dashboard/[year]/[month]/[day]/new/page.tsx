@@ -1,5 +1,5 @@
 
-import DayTask from "@/src/components/ui/dashboard/day/task";
+import { NewTaskForm } from "@/src/components/ui/dashboard/day/new";
 import Link from "next/link";
 
 interface PageProps {
@@ -10,7 +10,7 @@ interface PageProps {
     }>;
 }
 
-export default async function DayDashboardPage({ params }: PageProps) {
+export default async function NewDashboardPage({ params }: PageProps) {
     const { year, month, day } = await params;
 
     const date = new Date(`${year}-${month}-${day}`);
@@ -26,15 +26,12 @@ export default async function DayDashboardPage({ params }: PageProps) {
             <div className="max-w-6xl mx-auto">
                 <div className="bg-card rounded-lg shadow-sm p-6 mb-6 border">
                     <h1 className="text-3xl font-bold text-foreground mb-2">
-                        Dashboard du jour
+                        Nouvelle tache
                     </h1>
                     <p className="text-lg text-muted-foreground capitalize">
                         {formattedDate}
                     </p>
-                    <div className="w-full flex items-center justify-between mt-2">
-                        <Link href="/dashboard">Retour</Link>
-                        <Link href={`/dashboard/${year}/${month}/${day}/new`}>Nouvelle tâche</Link>
-                    </div>
+                    <Link href="/dashboard">Retour</Link>
                 </div>
 
                 <div className="bg-card rounded-lg shadow-sm p-6 border w-full">
@@ -42,7 +39,7 @@ export default async function DayDashboardPage({ params }: PageProps) {
                         Planification horaire
                     </h2>
 
-                    <DayTask year={year} month={month} day={day} />
+                    <NewTaskForm year={year} month={month} day={day} />
                 </div>
             </div>
         </div>

@@ -144,8 +144,8 @@ export default function DayTask({ year, month, day }: { year: string; month: str
                 return (
                     <div key={hour}>
                         <div className="flex items-start transition-colors rounded-lg px-2 h-[76px]">
-                            <div className="flex-shrink-0 w-24 pt-1">
-                                <span className={`text-2xl font-bold ${isBusinessHours ? 'text-primary' : 'text-foreground'
+                            <div className="flex-shrink-0 mr-2 pt-1">
+                                <span className={`text-lg sm:text-2xl font-bold ${isBusinessHours ? 'text-primary' : 'text-foreground'
                                     }`}>
                                     {hourFormatted}:00
                                 </span>
