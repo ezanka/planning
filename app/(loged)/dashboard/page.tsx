@@ -1,17 +1,11 @@
-import { getUser } from "@/src/lib/auth-server";
-import SignOut from "@/src/components/ui/global/signOut";
 
-export default async function DashboardPage() {
+import { Calendar13 } from "@/src/components/ui/dashboard/calendar";
 
-    const user = await getUser();
+export default function DashboardPage() {
 
     return (
         <div>
-            <h1>Dashboard</h1>
-            <p>{user?.email}</p>
-            <p>{user?.name}</p>
-            <p>{user?.createdAt.toLocaleDateString()}</p>
-            <SignOut />
+            <Calendar13 />
         </div>
     )
 }

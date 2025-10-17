@@ -19,6 +19,7 @@ model User {
   updatedAt     DateTime  @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
+  tasks         Task[]
 
   @@unique([email])
   @@map("user")
@@ -67,4 +68,26 @@ model Verification {
   updatedAt  DateTime @default(now()) @updatedAt
 
   @@map("verification")
+}
+
+enum TaskType {
+  Work
+  Personal
+  Sport
+  Other
+}
+
+model Task {
+  id        String    @id @default(cuid())
+  title     String
+  type      TaskType  @default(Other)
+  startHour Int
+  endHour   Int
+  date      DateTime  @db.Date
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+
+  @@map("task")
 }

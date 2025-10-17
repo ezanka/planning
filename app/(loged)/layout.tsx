@@ -1,6 +1,5 @@
 import { getUser } from "@/src/lib/auth-server";
 import { redirect } from "next/navigation";
-import { ThemeToggle } from "@/src/components/ui/global/themeToggle";
 
 export default async function LogedLayout({
     children,
@@ -15,9 +14,8 @@ export default async function LogedLayout({
     }
 
     return (
-        <main>
+        <main className="w-full flex justify-center">
             {children}
-            <ThemeToggle />
         </main>
     )
 }
