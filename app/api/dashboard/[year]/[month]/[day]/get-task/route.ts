@@ -2,7 +2,13 @@ import { getUser } from "@/src/lib/auth-server";
 import { NextResponse } from "next/server";
 import { prisma } from "@/src/lib/prisma";
 
-export async function GET(req: Request, { params }: { params: { year: string; month: string; day: string } }) {
+type Params = {
+    year: string;
+    month: string;
+    day: string;
+};
+
+export async function GET(req: Request, { params }: { params: Promise<Params> }) {
     const { year, month, day } = await params;
     const user = await getUser();
 

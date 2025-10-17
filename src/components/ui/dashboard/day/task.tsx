@@ -67,14 +67,11 @@ export default function DayTask({ year, month, day }: { year: string; month: str
         async function fetchTasks() {
             const response = await fetch(`/api/dashboard/${year}/${month}/${day}/get-task`);
             const data = await response.json();
-            console.log(year, month, day, data);
             setTasksData(data);
         }
 
         fetchTasks();
     }, [year, month, day]);
-
-    const plannedHours = tasksData.reduce((sum, task) => sum + (task.endHour - task.startHour), 0);
 
     return (
         <div className="relative">
