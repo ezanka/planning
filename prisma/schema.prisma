@@ -82,7 +82,9 @@ model Task {
   title     String
   type      TaskType  @default(Other)
   startHour Int
+  startMinute Int   @default(0)
   endHour   Int
+  endMinute Int   @default(0)
   date      DateTime  @db.Date
   userId    String
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
