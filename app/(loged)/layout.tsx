@@ -14,7 +14,7 @@ export default async function LogedLayout({
     }
 
     return (
-        <main className="w-full flex justify-center">
+        <main className="w-full flex justify-center p-8">
             {children}
         </main>
     )

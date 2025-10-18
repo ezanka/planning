@@ -135,7 +135,7 @@ export function NewTaskForm({ year, month, day }: { year: string; month: string;
     }
 
     return (
-            <div className="w-full max-w-md">
+            <div className="w-full">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <FormField
